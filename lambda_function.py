@@ -23,11 +23,10 @@ config = read_config_file(CONF_FILE) # read config file
 
 immo24_search_url = config.get('URLS','SEARCH1')
 immo24_base_url = config.get('URLS','BASEURL')
-# immo24_search_url = 'https://www.immobilienscout24.de/Suche/de/bayern/muenchen/wohnung-mieten?numberofrooms=2.0-&price=-1300.0&livingspace=45.0-&sorting=2'
-# immo24_base_url = 'https://www.immobilienscout24.de/expose/'
 
 bot_token = os.environ['BOTTOKEN'] # get bot token from lambda env var
 bot_chat_id = os.environ['CHATID']
+bot_chat_id2 = os.environ['CHATID2']
 
 def lambda_handler(event,context):
 
@@ -45,16 +44,17 @@ def lambda_handler(event,context):
 
     if not fresh_deals:
 
-        print('Nothing new')
+        bot_message = 'Nothing new'
 
     else:
 
-        bot_message = 'There are {} new offers:'.format(len(fresh_deals)) + '\n' + '\n'.join(fresh_deals)
+        bot_message = '{} new offers:'.format(len(fresh_deals)) + '\n' + '\n'.join(fresh_deals)
         bot_sendtext(bot_message, bot_token, bot_chat_id)
+        bot_sendtext(bot_message, bot_token, bot_chat_id) # send 2nd Telegram msg
 
         for fresh_deal in fresh_deals:
             write_db = put_item(fresh_deal) # update DB
-        print(write_db)
+        
 
     print('Execution time is {}'.format(time.time() - start_time))
     return {
