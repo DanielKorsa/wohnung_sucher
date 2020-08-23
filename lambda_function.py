@@ -1,7 +1,7 @@
 # coding=utf-8
 
 # Wohnung sucher
-# By Danil Konovalov <gesundmeister@gmail.com>
+# By Danil Konovalov <gesundmeister@gmail.com>!
 # Telegram bot to get the newest flat offers from Immobilienscout24.de
 
 import os
