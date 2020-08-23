@@ -33,7 +33,7 @@ def lambda_handler(event,context):
 
     start_time = time.time()
     new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
-    print(new_flats_url_list)
+    #print(new_flats_url_list)
 
     db_flat_weblinks = [] # Links on already saved flats in db
     db_flats_dict = scan_db('source', 'immoscout24')
@@ -41,7 +41,7 @@ def lambda_handler(event,context):
         db_flat_weblinks.append(db_flat['weblink'])
 
     fresh_deals = list(set(new_flats_url_list) - set(db_flat_weblinks))
-    #print(fresh_deals)
+    print(db_flat_weblinks)
 
     if not fresh_deals:
 
