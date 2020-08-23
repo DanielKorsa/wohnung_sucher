@@ -50,7 +50,7 @@ def lambda_handler(event,context):
 
         bot_message = '{} new offers:'.format(len(fresh_deals)) + '\n' + '\n'.join(fresh_deals)
         bot_sendtext(bot_message, bot_token, bot_chat_id)
-        bot_sendtext(bot_message, bot_token, bot_chat_id) # send 2nd Telegram msg
+        bot_sendtext(bot_message, bot_token, bot_chat_id2) # send 2nd Telegram msg
 
         for fresh_deal in fresh_deals:
             write_db = put_item(fresh_deal) # update DB
