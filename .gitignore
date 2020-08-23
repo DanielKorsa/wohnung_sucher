@@ -2,6 +2,7 @@
 test.html
 TEST.py
 wohnung_sucher/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
