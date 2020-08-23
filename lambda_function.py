@@ -17,11 +17,14 @@ from telegram_bot_handler import bot_sendtext
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-CONF_FILE = 'config.ini'
-config = read_config_file(CONF_FILE) # read config file
+# CONF_FILE = 'config.ini'
+# config = read_config_file(CONF_FILE) # read config file
 
-immo24_search_url = config.get('URLS','SEARCH1')
-immo24_base_url = config.get('URLS','BASEURL')
+# immo24_search_url = config.get('URLS','SEARCH1')
+# immo24_base_url = config.get('URLS','BASEURL')
+immo24_search_url = 'https://www.immobilienscout24.de/Suche/de/bayern/muenchen/wohnung-mieten?numberofrooms=2.0-&price=-1300.0&livingspace=45.0-&sorting=2'
+immo24_base_url = 'https://www.immobilienscout24.de/expose/'
+
 bot_token = os.environ['BOTTOKEN'] # get bot token from lambda env var
 bot_chat_id = os.environ['CHATID']
 
