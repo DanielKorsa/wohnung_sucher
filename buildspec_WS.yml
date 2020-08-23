@@ -22,7 +22,7 @@ phases:
       - TMP_DIR="dist-$ISO_DATE"
       - mkdir $TMP_DIR
       - cp *.py $TMP_DIR
-#      - cp *.json $TMP_DIR
+      - cp *.ini $TMP_DIR
 #      - cp *.html $TMP_DIR
       - cp -rf env/lib/python3.7/site-packages/* $TMP_DIR
       - cd $TMP_DIR; zip -r ../dist.zip *

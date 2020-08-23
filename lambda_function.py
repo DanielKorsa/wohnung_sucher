@@ -5,6 +5,7 @@
 # Telegram bot to get the newest flat offers from Immobilienscout24.de
 
 import os
+import logging
 import json
 import boto3
 
@@ -13,6 +14,8 @@ from immoscout24_scrapper import get_new_flats_info
 from dynamodb_handler import scan_db, put_item
 from telegram_bot_handler import bot_sendtext
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 CONF_FILE = 'config.ini'
 config = read_config_file(CONF_FILE) # read config file
