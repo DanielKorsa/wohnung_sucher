@@ -32,29 +32,29 @@ def lambda_handler(event,context):
 
     print('ITS WORKING')
     new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
-    #print(new_flats_list)
+    print(new_flats_list)
 
-    # db_flat_weblinks = [] # Links on already saved flats in db
-    # db_flats_dict = scan_db('source', 'immoscout24')
-    # for db_flat in db_flats_dict:
-    #     db_flat_weblinks.append(db_flat['weblink'])
+    db_flat_weblinks = [] # Links on already saved flats in db
+    db_flats_dict = scan_db('source', 'immoscout24')
+    for db_flat in db_flats_dict:
+        db_flat_weblinks.append(db_flat['weblink'])
 
-    # fresh_deals = list(set(new_flats_url_list) - set(db_flat_weblinks))
-    # #print(fresh_deals)
+    fresh_deals = list(set(new_flats_url_list) - set(db_flat_weblinks))
+    #print(fresh_deals)
 
-    # if not fresh_deals:
+    if not fresh_deals:
 
-    #     print('Nothing new')
+        print('Nothing new')
 
-    # else:
+    else:
 
-    #     bot_message = 'There are {} new offers:'.format(len(fresh_deals)) + '\n' + '\n'.join(fresh_deals)
-    #     bot_sendtext(bot_message, bot_token, bot_chat_id)
+        bot_message = 'There are {} new offers:'.format(len(fresh_deals)) + '\n' + '\n'.join(fresh_deals)
+        bot_sendtext(bot_message, bot_token, bot_chat_id)
 
-    #     for fresh_deal in fresh_deals:
-    #         write_db = put_item(fresh_deal) # update DB
-    #     print(write_db)
+        for fresh_deal in fresh_deals:
+            write_db = put_item(fresh_deal) # update DB
+        print(write_db)
 
-    # return {
-    #     'message' : bot_message
-    # }
+    return {
+        'message' : bot_message
+    }
