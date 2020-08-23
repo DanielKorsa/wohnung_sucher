@@ -1,6 +1,7 @@
 #
 
 from tools import get_header
+import re
 import requests
 from bs4 import BeautifulSoup
 
@@ -31,7 +32,26 @@ def get_new_flats_info(immo24_search_url, immo24_base_url):
 
     return new_flats_url_list
 
+def get_flat_full_details(immo_flat_url):
 
+    flat_content = get_page_content(immo_flat_url)
 
+    flat_full_info = {}
+    flat_full_info['description'] = flat_content.find(class_= 'criteriagroup').h1.text.strip()
+    flat_full_info['address'] = flat_content.find(class_= 'address-block').text.strip()
+    flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete is24-value font-semibold is24-preis-value').text.strip()
+    flat_full_info['rooms'] = flat_content.find(class_= 'is24qa-zi is24-value font-semibold').text.strip()
+    flat_full_info['Area'] = flat_content.find(class_= 'is24qa-flaeche is24-value font-semibold').text.strip()
+    flat_full_info['movinDate'] = flat_content.find(class_= 'is24qa-bezugsfrei-ab grid-item three-fifths').text.strip()
+    flat_full_info['phone'] = ''
+    flat_full_info['email'] = ''
+    flat_full_info['weblink'] = immo_flat_url
+    flat_full_info['source'] = 'immoscout24'
+    
+    online_since = flat_content.find(class_= 'criteriagroup flex flex--wrap criteria-group--spacing padding-top-s').find('script').text.strip()
+    for online in online_since.splitlines():
+        if "exposeOnlineSince" in online:
+            online_date = re.findall(r'"([^"]*)"', online)
+            flat_full_info['onlineSince'] = ''.join(online_date).split('.')[0].strip()
 
-# exposeOnlineSince: "2020-07-31T11:01:50.000+02:00"
+    return flat_full_info

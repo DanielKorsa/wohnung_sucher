@@ -11,7 +11,7 @@ import json
 import boto3
 
 from tools import read_config_file
-from immoscout24_scrapper import get_new_flats_info
+from immoscout24_scrapper import get_new_flats_info, get_flat_full_details
 from dynamodb_handler import scan_db, put_item
 from telegram_bot_handler import bot_sendtext
 
@@ -39,21 +39,22 @@ def lambda_handler(event,context):
     for db_flat in db_flats_dict:
         db_flat_weblinks.append(db_flat['weblink'])
 
-    fresh_deals = list(set(new_flats_url_list) - set(db_flat_weblinks))
-    print(db_flat_weblinks)
+    fresh_deals_urls = list(set(new_flats_url_list) - set(db_flat_weblinks))
+    #print(db_flat_weblinks)
 
-    if not fresh_deals:
+    if not fresh_deals_urls:
 
         bot_message = 'Nothing new'
 
     else:
 
-        bot_message = '{} new offers:'.format(len(fresh_deals)) + '\n' + '\n'.join(fresh_deals)
+        bot_message = '{} new offers:'.format(len(fresh_deals_urls)) + '\n' + '\n'.join(fresh_deals_urls)
         bot_sendtext(bot_message, bot_token, bot_chat_id)
         bot_sendtext(bot_message, bot_token, bot_chat_id2) # send 2nd Telegram msg
 
-        for fresh_deal in fresh_deals:
-            write_db = put_item(fresh_deal) # update DB
+        for fresh_deal_url in fresh_deals_urls:
+            flat_info = get_flat_full_details(fresh_deal_url)
+            write_db = put_item(flat_info) # update DB
         
 
     print('Execution time is {}'.format(time.time() - start_time))

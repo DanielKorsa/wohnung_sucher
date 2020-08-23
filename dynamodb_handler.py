@@ -21,16 +21,12 @@ table = dynamodb.Table('wohnung_sucher_db')
 #     return response
 
 
-def put_item(weblink,online_since = 'not Implemented', source = 'immoscout24'):
+def put_item(flat_info):
     '''
     Insert a new item in DB
     '''
     response = table.put_item(
-        Item = {
-            'weblink' : weblink,
-            'onlineSince' : online_since,
-            'source' : source
-        }
+        Item = flat_info
     )
     return response
 
