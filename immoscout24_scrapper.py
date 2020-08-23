@@ -42,7 +42,10 @@ def get_flat_full_details(immo_flat_url):
     flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete is24-value font-semibold is24-preis-value').text.strip()
     flat_full_info['rooms'] = flat_content.find(class_= 'is24qa-zi is24-value font-semibold').text.strip()
     flat_full_info['Area'] = flat_content.find(class_= 'is24qa-flaeche is24-value font-semibold').text.strip()
-    flat_full_info['movinDate'] = flat_content.find(class_= 'is24qa-bezugsfrei-ab grid-item three-fifths').text.strip()
+    try:
+        flat_full_info['movinDate'] = flat_content.find(class_= 'is24qa-bezugsfrei-ab grid-item three-fifths').text.strip()
+    except AttributeError:
+        flat_full_info['movinDate'] = ''
     flat_full_info['phone'] = ''
     flat_full_info['email'] = ''
     flat_full_info['weblink'] = immo_flat_url
