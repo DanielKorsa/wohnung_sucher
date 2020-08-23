@@ -5,6 +5,7 @@
 # Telegram bot to get the newest flat offers from Immobilienscout24.de
 
 import os
+import time
 import logging
 import json
 import boto3
@@ -17,20 +18,20 @@ from telegram_bot_handler import bot_sendtext
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# CONF_FILE = 'config.ini'
-# config = read_config_file(CONF_FILE) # read config file
+CONF_FILE = 'config.ini'
+config = read_config_file(CONF_FILE) # read config file
 
-# immo24_search_url = config.get('URLS','SEARCH1')
-# immo24_base_url = config.get('URLS','BASEURL')
-immo24_search_url = 'https://www.immobilienscout24.de/Suche/de/bayern/muenchen/wohnung-mieten?numberofrooms=2.0-&price=-1300.0&livingspace=45.0-&sorting=2'
-immo24_base_url = 'https://www.immobilienscout24.de/expose/'
+immo24_search_url = config.get('URLS','SEARCH1')
+immo24_base_url = config.get('URLS','BASEURL')
+# immo24_search_url = 'https://www.immobilienscout24.de/Suche/de/bayern/muenchen/wohnung-mieten?numberofrooms=2.0-&price=-1300.0&livingspace=45.0-&sorting=2'
+# immo24_base_url = 'https://www.immobilienscout24.de/expose/'
 
 bot_token = os.environ['BOTTOKEN'] # get bot token from lambda env var
 bot_chat_id = os.environ['CHATID']
 
 def lambda_handler(event,context):
 
-    print('ITS WORKING')
+    start_time = time.time()
     new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
     print(new_flats_url_list)
 
@@ -55,6 +56,7 @@ def lambda_handler(event,context):
             write_db = put_item(fresh_deal) # update DB
         print(write_db)
 
+    print('Execution time is {}'.format(time.time() - start_time))
     return {
         'message' : bot_message
     }
