@@ -31,8 +31,8 @@ bot_chat_id = os.environ['CHATID']
 def lambda_handler(event,context):
 
     print('ITS WORKING')
-    # new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
-    # #print(new_flats_list)
+    new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
+    #print(new_flats_list)
 
     # db_flat_weblinks = [] # Links on already saved flats in db
     # db_flats_dict = scan_db('source', 'immoscout24')
