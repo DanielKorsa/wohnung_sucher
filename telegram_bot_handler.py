@@ -15,3 +15,8 @@ def bot_sendtext(bot_message, bot_token, bot_chat_id):
 
 # test = bot_sendtext("Testing Telegram bot")
 # print(test)
+
+#/bot_sucher189004455DasdiFHAi
+
+
+

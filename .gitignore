@@ -3,6 +3,7 @@ test.html
 TEST.py
 wohnung_sucher/
 .vscode/
+database_dump.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

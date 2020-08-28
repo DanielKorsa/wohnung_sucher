@@ -49,15 +49,20 @@ def lambda_handler(event,context):
     else:
 
         bot_message = '{} new offers:'.format(len(fresh_deals_urls)) + '\n' + '\n'.join(fresh_deals_urls)
-        bot_sendtext(bot_message, bot_token, bot_chat_id)
-        bot_sendtext(bot_message, bot_token, bot_chat_id2) # send 2nd Telegram msg
+        #bot_sendtext(bot_message, bot_token, bot_chat_id)
+        bot_sendtext(bot_message, bot_token, bot_chat_id2) # send msg to group
 
         for fresh_deal_url in fresh_deals_urls:
             flat_info = get_flat_full_details(fresh_deal_url)
-            write_db = put_item(flat_info) # update DB
+            if flat_info:
+                put_item(flat_info) # update DB
+            else:
+                print('corrupted link')
         
 
     print('Execution time is {}'.format(time.time() - start_time))
     return {
         'message' : bot_message
     }
+
+#TODO add "pets allowed" to Items
