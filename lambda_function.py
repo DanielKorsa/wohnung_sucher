@@ -65,4 +65,3 @@ def lambda_handler(event,context):
         'message' : bot_message
     }
 
-#TODO add "pets allowed" to Items
