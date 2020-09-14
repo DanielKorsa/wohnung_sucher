@@ -42,7 +42,7 @@ def get_flat_full_details(immo_flat_url):
     try:
         flat_full_info['description'] = flat_content.find(class_= 'criteriagroup').h1.text.strip()
     except AttributeError:
-        flat_full_info = {}
+        flat_full_info ['description'] = 'no data'
         print('shit happened')
     else:
         flat_full_info['address'] = flat_content.find(class_= 'address-block').text.strip()

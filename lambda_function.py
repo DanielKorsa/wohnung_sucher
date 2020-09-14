@@ -54,11 +54,7 @@ def lambda_handler(event,context):
 
         for fresh_deal_url in fresh_deals_urls:
             flat_info = get_flat_full_details(fresh_deal_url)
-            if flat_info:
-                put_item(flat_info) # update DB
-            else:
-                print('corrupted link')
-        
+            put_item(flat_info) # update DB
 
     print('Execution time is {}'.format(time.time() - start_time))
     return {
