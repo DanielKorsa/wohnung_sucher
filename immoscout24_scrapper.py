@@ -72,7 +72,7 @@ def get_flat_full_details(immo_flat_url):
                     flat_full_info['onlineSince'] = ''.join(online_date).split('.')[0].strip()
         except Exception as e:
             print(e)
-            online_since = 'no data'
+            flat_full_info['onlineSince'] = 'no data'
         # try:
         #     flat_full_info['imageLink'] = flat_content.find(class_= 'first-gallery-picture-container')
         # except:
