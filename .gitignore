@@ -4,6 +4,7 @@ TEST.py
 wohnung_sucher/
 .vscode/
 database_dump.json
+test/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

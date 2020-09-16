@@ -39,11 +39,13 @@ def get_flat_full_details(immo_flat_url):
     flat_content = get_page_content(immo_flat_url)
     #pprint.pprint(flat_content)
     flat_full_info = {}
+    flat_full_info['weblink'] = immo_flat_url
+    flat_full_info['source'] = 'immoscout24'
     try:
         flat_full_info['description'] = flat_content.find(class_= 'criteriagroup').h1.text.strip()
     except AttributeError:
-        flat_full_info ['description'] = 'no data'
-        print('shit happened')
+        flat_full_info ['description'] = ''
+        print('AttributeError - no descripttion')
     else:
         flat_full_info['address'] = flat_content.find(class_= 'address-block').text.strip()
         flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete is24-value font-semibold is24-preis-value').text.strip()
@@ -53,18 +55,24 @@ def get_flat_full_details(immo_flat_url):
             flat_full_info['movinDate'] = flat_content.find(class_= 'is24qa-bezugsfrei-ab grid-item three-fifths').text.strip()
         except AttributeError:
             flat_full_info['movinDate'] = ''
+            print('AttributeError - no move in date')
         flat_full_info['phone'] = ''
         flat_full_info['email'] = ''
-        flat_full_info['weblink'] = immo_flat_url
-        flat_full_info['source'] = 'immoscout24'
         try:
             flat_full_info['petsAllowed'] = flat_content.find(class_= 'is24qa-haustiere grid-item three-fifths').text.strip()
         except AttributeError:
             flat_full_info['petsAllowed'] = ''
+            print('AttributeError - no pets info')
         online_since = flat_content.find(class_= 'criteriagroup flex flex--wrap criteria-group--spacing padding-top-s').find('script').text.strip()
         for online in online_since.splitlines():
             if "exposeOnlineSince" in online:
                 online_date = re.findall(r'"([^"]*)"', online)
                 flat_full_info['onlineSince'] = ''.join(online_date).split('.')[0].strip()
+        # try:
+        #     flat_full_info['imageLink'] = flat_content.find(class_= 'first-gallery-picture-container')
+        # except:
+        #     print('no picture provided')
+        #     flat_full_info['imageLink'] = ''
+            
 
     return flat_full_info
