@@ -40,6 +40,7 @@ def get_flat_full_details(immo_flat_url):
     #pprint.pprint(flat_content)
     flat_full_info = {}
     flat_full_info['weblink'] = immo_flat_url
+    print(immo_flat_url)
     flat_full_info['source'] = 'immoscout24'
     try:
         flat_full_info['description'] = flat_content.find(class_= 'criteriagroup').h1.text.strip()
@@ -69,8 +70,9 @@ def get_flat_full_details(immo_flat_url):
                 if "exposeOnlineSince" in online:
                     online_date = re.findall(r'"([^"]*)"', online)
                     flat_full_info['onlineSince'] = ''.join(online_date).split('.')[0].strip()
-        except:
-            online_since = ''
+        except Exception as e:
+            print(e)
+            online_since = 'no data'
         # try:
         #     flat_full_info['imageLink'] = flat_content.find(class_= 'first-gallery-picture-container')
         # except:
