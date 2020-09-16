@@ -70,8 +70,10 @@ def get_flat_full_details(immo_flat_url):
                 if "exposeOnlineSince" in online:
                     online_date = re.findall(r'"([^"]*)"', online)
                     flat_full_info['onlineSince'] = ''.join(online_date).split('.')[0].strip()
+                else:
+                    flat_full_info['onlineSince'] = ''
         except:
-            flat_full_info['onlineSince'] = 'no data'
+            flat_full_info['onlineSince'] = ''
         # try:
         #     flat_full_info['imageLink'] = flat_content.find(class_= 'first-gallery-picture-container')
         # except:
