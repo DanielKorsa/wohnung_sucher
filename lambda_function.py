@@ -55,8 +55,8 @@ def lambda_handler(event,context):
         for fresh_deal_url in fresh_deals_urls:
             flat_info = get_flat_full_details(fresh_deal_url)
             put_item(flat_info) # update DB
-            bot_message = ' <b>Description:</b>{} \n Address:{} \n Price:{} \n Area:{} \n \
-            Move in date:{} \n {}'.format(flat_info['description'], flat_info['address'], flat_info['price'], flat_info['Area'], flat_info['movinDate'],flat_info['weblink'])
+            bot_message = ' <b>Description:</b>{} \n <b>Address</b>:{} \n <b>Price</b>:{} \n <b>Area</b>:{} \n \
+            <b>Move in date</b>:{} \n {}'.format(flat_info['description'], flat_info['address'], flat_info['price'], flat_info['Area'], flat_info['movinDate'],flat_info['weblink'])
             bot_sendtext(bot_message, bot_token, bot_chat_id2) # send msg to group
             
     print('Execution time is {}'.format(time.time() - start_time))
