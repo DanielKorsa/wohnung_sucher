@@ -56,7 +56,7 @@ def lambda_handler(event,context):
             flat_info = get_flat_full_details(fresh_deal_url)
             put_item(flat_info) # update DB
             bot_message = ' Description:{} \n Address:{} \n Price:{} \n Area:{} \n \
-            Move in date:{}'.format(flat_info['description'], flat_info['address'], flat_info['price'], flat_info['Area'], flat_info['movinDate'])
+            Move in date:{} \n {}'.format(flat_info['description'], flat_info['address'], flat_info['price'], flat_info['Area'], flat_info['movinDate'],flat_info['weblink'])
             bot_sendtext(bot_message, bot_token, bot_chat_id2) # send msg to group
             
     print('Execution time is {}'.format(time.time() - start_time))
