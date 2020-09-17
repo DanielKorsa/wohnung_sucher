@@ -42,37 +42,44 @@ def get_flat_full_details(immo_flat_url):
     flat_full_info['weblink'] = immo_flat_url
     print(immo_flat_url)
     flat_full_info['source'] = 'immoscout24'
+    flat_full_info['phone'] = '' # not scraping
+    flat_full_info['email'] = '' # not scraping
     try:
         flat_full_info['description'] = flat_content.find(class_= 'criteriagroup').h1.text.strip()
     except AttributeError:
         flat_full_info ['description'] = ''
         print('AttributeError - no descripttion')
-    else:
-        flat_full_info['address'] = flat_content.find(class_= 'address-block').text.strip()
-        flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete is24-value font-semibold is24-preis-value').text.strip()
-        flat_full_info['rooms'] = flat_content.find(class_= 'is24qa-zi is24-value font-semibold').text.strip()
-        flat_full_info['Area'] = flat_content.find(class_= 'is24qa-flaeche is24-value font-semibold').text.strip()
-        try:
-            flat_full_info['movinDate'] = flat_content.find(class_= 'is24qa-bezugsfrei-ab grid-item three-fifths').text.strip()
-        except AttributeError:
-            flat_full_info['movinDate'] = ''
-            print('AttributeError - no move in date')
-        flat_full_info['phone'] = ''
-        flat_full_info['email'] = ''
+    # This parameters are required:
+    flat_full_info['address'] = flat_content.find(class_= 'address-block').text.strip()
+    flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete is24-value font-semibold is24-preis-value').text.strip()
+    flat_full_info['rooms'] = flat_content.find(class_= 'is24qa-zi is24-value font-semibold').text.strip()
+    flat_full_info['Area'] = flat_content.find(class_= 'is24qa-flaeche is24-value font-semibold').text.strip()
+
+    try:
+        flat_full_info['movinDate'] = flat_content.find(class_= 'is24qa-bezugsfrei-ab grid-item three-fifths').text.strip()
+    except AttributeError:
+        flat_full_info['movinDate'] = ''
+        print('AttributeError - no move in date')
+
+    #flat_full_info['onlineSince'] = 'no data' #! IF IT GOES WRONG AGAIN!
+    try:
+        flat_full_info['petsAllowed'] = flat_content.find(class_= 'is24qa-haustiere grid-item three-fifths').text.strip()
+    except AttributeError:
+        flat_full_info['petsAllowed'] = ''
+        print('AttributeError - no pets info')
+
+    try:
+        online_since = flat_content.find(class_= 'criteriagroup flex flex--wrap criteria-group--spacing padding-top-s').find('script').text.strip()
+        for online in online_since.splitlines():
+            if "exposeOnlineSince" in online:
+                online_date = re.findall(r'"([^"]*)"', online)
+                flat_full_info['onlineSince'] = ''.join(online_date).split('.')[0].strip()
+            else:
+                flat_full_info['onlineSince'] = 'no data'
+    except Exception as e:
+        print(e)
         flat_full_info['onlineSince'] = 'no data'
-        try:
-            flat_full_info['petsAllowed'] = flat_content.find(class_= 'is24qa-haustiere grid-item three-fifths').text.strip()
-        except AttributeError:
-            flat_full_info['petsAllowed'] = ''
-            print('AttributeError - no pets info')
-        # else:
-        #     online_since = flat_content.find(class_= 'criteriagroup flex flex--wrap criteria-group--spacing padding-top-s').find('script').text.strip()
-        #     for online in online_since.splitlines():
-        #         if "exposeOnlineSince" in online:
-        #             online_date = re.findall(r'"([^"]*)"', online)
-        #             flat_full_info['onlineSince'] = ''.join(online_date).split('.')[0].strip()
-        #         else:
-        #             flat_full_info['onlineSince'] = 'no data'
+        #! Adding a pic to it
         # # try:
         #     flat_full_info['imageLink'] = flat_content.find(class_= 'first-gallery-picture-container')
         # except:
