@@ -15,7 +15,21 @@ flat_info = {'Area': '50 m²',
 
 
 
-bot_message = ' Description:{} \n Address:{} \n Price:{} \n Area:{} \n \
-Move in date:{}'.format(flat_info['description'], flat_info['address'], flat_info['price'], flat_info['Area'], flat_info['movinDate'])
 
-print(bot_message)
+
+from immoscout24_scrapper import get_flat_full_details
+import pprint
+
+# url = 'https://www.immobilienscout24.de/expose/122863597#/'
+
+# full_info = get_flat_full_details(url)
+# img_link_dirty = full_info['imageLink']
+
+# pprint.pprint(img_link_dirty)
+
+img_weblink = 'https://pictures.immobilienscout24.de/listings/622c9c55-231f-4483-861b-1f1fca5517a5-1398300448.png/ORIG/legacy_thumbnail/1024x768/format/jpg/quality/80'
+
+weblink = 'https://www.immobilienscout24.de/expose/114676849'
+
+
+

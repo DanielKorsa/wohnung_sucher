@@ -6,6 +6,10 @@ wohnung_sucher/
 database_dump.json
 test/
 
+# Images and docs
+
+*.jpg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

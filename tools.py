@@ -2,6 +2,8 @@
 
 import random
 import configparser
+import requests
+import logging
 
 def get_header():
     '''
@@ -50,27 +52,53 @@ def read_config_file(conf_filename):
     return config
 
 
+def make_img_name(weblink):
+    '''
+    '''
+    return weblink.split('/')[-1]
 
 
-# def get_old_flats():
-#     old_flats = ['https://www.immobilienscout24.de/expose/122104655', 
-#     'https://www.immobilienscout24.de/expose/122103422', 
-#     'https://www.immobilienscout24.de/expose/122100453', 
-#     'https://www.immobilienscout24.de/expose/122100254', 
-#     'https://www.immobilienscout24.de/expose/83329790', 
-#     'https://www.immobilienscout24.de/expose/122015149', 
-#     'https://www.immobilienscout24.de/expose/122042075', 
-#     'https://www.immobilienscout24.de/expose/122076460', 
-#     'https://www.immobilienscout24.de/expose/122075160', 
-#     'https://www.immobilienscout24.de/expose/122075009', 
-#     'https://www.immobilienscout24.de/expose/122074277', 
-#     'https://www.immobilienscout24.de/expose/122069734', 
-#     'https://www.immobilienscout24.de/expose/122070608', 
-#     'https://www.immobilienscout24.de/expose/121610143', 
-#     'https://www.immobilienscout24.de/expose/122062917', 
-#     'https://www.immobilienscout24.de/expose/122055487', 
-#     'https://www.immobilienscout24.de/expose/122055072', 
-#     'https://www.immobilienscout24.de/expose/122053450', 
-#     'https://www.immobilienscout24.de/expose/121728396']
 
-#     return old_flats
+
+def download_img(img_url, img_new_path):
+    '''
+    Download img from url
+    '''
+    img_data = requests.get(img_url).content
+    with open(img_new_path, 'wb') as handler:
+        handler.write(img_data)
+
+
+import boto3
+from botocore.exceptions import ClientError
+
+
+def upload_file_s3(file_name, bucket, object_name=None):
+    """Upload a file to an S3 bucket
+
+    :param file_name: File to upload
+    :param bucket: Bucket to upload to
+    :param object_name: S3 object name. If not specified then file_name is used
+    :return: True if file was uploaded, else False
+    """
+
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = file_name
+
+    # Upload the file
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.upload_file(file_name, bucket, object_name)
+    except ClientError as e:
+        logging.error(e)
+        return False
+    
+    return True
+
+
+# img_name = make_img_name(weblink)
+# temp_img_path = '/tmp/' + img_name + '.jpg'
+# download_img(img_url, temp_img_path)
+# file_uploaded = upload_file_s3(temp_img_path, 'wohnungsuchers3', 'wohnungSucherImages/' + img_name + '.jpg')
+# print(file_uploaded)

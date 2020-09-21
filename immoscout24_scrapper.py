@@ -14,7 +14,9 @@ def get_page_content(url):
     Get page content
     '''
     headers = get_header()
-    content = BeautifulSoup(requests.get(url, headers = headers).text, 'html5lib')
+    response = requests.get(url, headers = headers)
+    pprint.pprint(response)
+    content = BeautifulSoup(response.text, 'html5lib')
 
     return content
 
@@ -79,12 +81,15 @@ def get_flat_full_details(immo_flat_url):
     except Exception as e:
         print(e)
         flat_full_info['onlineSince'] = 'no data'
-        #! Adding a pic to it
-        # # try:
-        #     flat_full_info['imageLink'] = flat_content.find(class_= 'first-gallery-picture-container')
-        # except:
-        #     print('no picture provided')
-        #     flat_full_info['imageLink'] = ''
-        #print('cunt online since{}'.format(online_since))
+    
+    #Adding a pic to it
+    try:
+        flat_full_info['imageLink'] = flat_content.find(class_= 'first-gallery-picture-container').find('img').get('src')
+        #print(type(flat_full_info['imageLink']))
+        
+    except:
+        print('no picture provided')
+        flat_full_info['imageLink'] = ''
+
 
     return flat_full_info
