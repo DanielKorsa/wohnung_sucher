@@ -3,6 +3,7 @@
 import random
 import configparser
 import requests
+import logging
 
 def get_header():
     '''
@@ -58,11 +59,46 @@ def make_img_name(weblink):
 
 
 
-import requests
-def download_img(img_url, img_new_name):
+
+def download_img(img_url, img_new_path):
     '''
     Download img from url
     '''
     img_data = requests.get(img_url).content
-    with open(img_new_name + '.jpg', 'wb') as handler:
+    with open(img_new_path, 'wb') as handler:
         handler.write(img_data)
+
+
+import boto3
+from botocore.exceptions import ClientError
+
+
+def upload_file_s3(file_name, bucket, object_name=None):
+    """Upload a file to an S3 bucket
+
+    :param file_name: File to upload
+    :param bucket: Bucket to upload to
+    :param object_name: S3 object name. If not specified then file_name is used
+    :return: True if file was uploaded, else False
+    """
+
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = file_name
+
+    # Upload the file
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.upload_file(file_name, bucket, object_name)
+    except ClientError as e:
+        logging.error(e)
+        return False
+    
+    return True
+
+
+img_name = make_img_name(weblink)
+temp_img_path = '/tmp/' + img_name + '.jpg'
+download_img(img_url, temp_img_path)
+file_uploaded = upload_file_s3(temp_img_path, 'wohnungsuchers3', 'wohnungSucherImages/' + img_name + '.jpg')
+print(file_uploaded)
