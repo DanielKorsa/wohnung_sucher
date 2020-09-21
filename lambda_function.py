@@ -10,7 +10,7 @@ import logging
 import json
 import boto3
 
-from tools import read_config_file
+from tools import read_config_file, make_img_name, download_img, upload_file_s3
 from immoscout24_scrapper import get_new_flats_info, get_flat_full_details
 from dynamodb_handler import scan_db, put_item
 from telegram_bot_handler import bot_sendtext
@@ -58,8 +58,17 @@ def lambda_handler(event,context):
             bot_message = ' <b>Description:</b>{} \n <b>Address</b>:{} \n <b>Price</b>:{} \n <b>Area</b>:{} \n \
             <b>Move in date</b>:{} \n {}'.format(flat_info['description'], flat_info['address'], flat_info['price'], flat_info['Area'], flat_info['movinDate'],flat_info['weblink'])
             bot_sendtext(bot_message, bot_token, bot_chat_id2) # send msg to group
-
-        #! Save img to S3
+            
+            #! Save img to S3
+            if flat_info['imageLink'] != '':
+                img_name = make_img_name(flat_info['weblink'])
+                temp_img_path = '/tmp/' + img_name + '.jpg'
+                download_img(flat_info['imageLink'], temp_img_path)
+                file_uploaded = upload_file_s3(temp_img_path, 'wohnungsuchers3', 'wohnungSucherImages/' + img_name + '.jpg')
+                print(file_uploaded)
+            
+            else:
+                print('no picture was uploaded')
 
     print('Execution time is {}'.format(time.time() - start_time))
     return {

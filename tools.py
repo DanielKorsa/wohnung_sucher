@@ -97,8 +97,8 @@ def upload_file_s3(file_name, bucket, object_name=None):
     return True
 
 
-img_name = make_img_name(weblink)
-temp_img_path = '/tmp/' + img_name + '.jpg'
-download_img(img_url, temp_img_path)
-file_uploaded = upload_file_s3(temp_img_path, 'wohnungsuchers3', 'wohnungSucherImages/' + img_name + '.jpg')
-print(file_uploaded)
+# img_name = make_img_name(weblink)
+# temp_img_path = '/tmp/' + img_name + '.jpg'
+# download_img(img_url, temp_img_path)
+# file_uploaded = upload_file_s3(temp_img_path, 'wohnungsuchers3', 'wohnungSucherImages/' + img_name + '.jpg')
+# print(file_uploaded)
