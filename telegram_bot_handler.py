@@ -18,5 +18,11 @@ def bot_sendtext(bot_message, bot_token, bot_chat_id):
 
 #/bot_sucher189004455DasdiFHAi
 
+def bot_sendpic(pic_path, bot_token, bot_chat_id):
 
-
+    url = 'https://api.telegram.org/bot' + bot_token + '/sendPhoto'
+    files = {'photo': open(pic_path, 'rb')}
+    data = {'chat_id' : bot_chat_id}
+    r = requests.post(url, files=files, data=data)
+    
+    return (r.status_code, r.reason, r.content)

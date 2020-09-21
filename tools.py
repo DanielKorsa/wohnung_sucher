@@ -2,6 +2,7 @@
 
 import random
 import configparser
+import requests
 
 def get_header():
     '''
@@ -50,27 +51,18 @@ def read_config_file(conf_filename):
     return config
 
 
+def make_img_name(weblink):
+    '''
+    '''
+    return weblink.split('/')[-1]
 
 
-# def get_old_flats():
-#     old_flats = ['https://www.immobilienscout24.de/expose/122104655', 
-#     'https://www.immobilienscout24.de/expose/122103422', 
-#     'https://www.immobilienscout24.de/expose/122100453', 
-#     'https://www.immobilienscout24.de/expose/122100254', 
-#     'https://www.immobilienscout24.de/expose/83329790', 
-#     'https://www.immobilienscout24.de/expose/122015149', 
-#     'https://www.immobilienscout24.de/expose/122042075', 
-#     'https://www.immobilienscout24.de/expose/122076460', 
-#     'https://www.immobilienscout24.de/expose/122075160', 
-#     'https://www.immobilienscout24.de/expose/122075009', 
-#     'https://www.immobilienscout24.de/expose/122074277', 
-#     'https://www.immobilienscout24.de/expose/122069734', 
-#     'https://www.immobilienscout24.de/expose/122070608', 
-#     'https://www.immobilienscout24.de/expose/121610143', 
-#     'https://www.immobilienscout24.de/expose/122062917', 
-#     'https://www.immobilienscout24.de/expose/122055487', 
-#     'https://www.immobilienscout24.de/expose/122055072', 
-#     'https://www.immobilienscout24.de/expose/122053450', 
-#     'https://www.immobilienscout24.de/expose/121728396']
 
-#     return old_flats
+import requests
+def download_img(img_url, img_new_name):
+    '''
+    Download img from url
+    '''
+    img_data = requests.get(img_url).content
+    with open(img_new_name + '.jpg', 'wb') as handler:
+        handler.write(img_data)

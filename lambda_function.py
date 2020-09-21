@@ -58,7 +58,9 @@ def lambda_handler(event,context):
             bot_message = ' <b>Description:</b>{} \n <b>Address</b>:{} \n <b>Price</b>:{} \n <b>Area</b>:{} \n \
             <b>Move in date</b>:{} \n {}'.format(flat_info['description'], flat_info['address'], flat_info['price'], flat_info['Area'], flat_info['movinDate'],flat_info['weblink'])
             bot_sendtext(bot_message, bot_token, bot_chat_id2) # send msg to group
-            
+
+        #! Save img to S3
+
     print('Execution time is {}'.format(time.time() - start_time))
     return {
         'message' : bot_message
