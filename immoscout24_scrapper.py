@@ -1,6 +1,7 @@
 #
 
 from tools import get_header
+from datetime import datetime
 import re
 import pprint
 import requests
@@ -70,17 +71,19 @@ def get_flat_full_details(immo_flat_url):
         flat_full_info['petsAllowed'] = ''
         print('AttributeError - no pets info')
 
+
     try:
         online_since = flat_content.find(class_= 'criteriagroup flex flex--wrap criteria-group--spacing padding-top-s').find('script').text.strip()
         for online in online_since.splitlines():
             if "exposeOnlineSince" in online:
                 online_date = re.findall(r'"([^"]*)"', online)
                 flat_full_info['onlineSince'] = ''.join(online_date).split('.')[0].strip()
+                break
             else:
                 flat_full_info['onlineSince'] = 'no data'
     except Exception as e:
         print(e)
-        flat_full_info['onlineSince'] = 'no data'
+        flat_full_info['onlineSince'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
     
     #Adding a pic to it
     try:
