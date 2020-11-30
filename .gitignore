@@ -5,6 +5,7 @@ wohnung_sucher/
 .vscode/
 database_dump.json
 test/
+test.py
 
 # Images and docs
 

@@ -25,7 +25,7 @@ immo24_search_url = config.get('URLS','SEARCH1')
 immo24_base_url = config.get('URLS','BASEURL')
 
 bot_token = os.environ['BOTTOKEN'] # get bot token from lambda env var
-bot_chat_id = os.environ['CHATID']
+#bot_chat_id = os.environ['CHATID'] #! For personal use 
 bot_chat_id2 = os.environ['CHATID2']
 
 def lambda_handler(event,context):
@@ -58,17 +58,17 @@ def lambda_handler(event,context):
             bot_message = ' <b>Description:</b>{} \n <b>Address</b>:{} \n <b>Price</b>:{} \n <b>Area</b>:{} \n \
             <b>Move in date</b>:{} \n {}'.format(flat_info['description'], flat_info['address'], flat_info['price'], flat_info['Area'], flat_info['movinDate'],flat_info['weblink'])
             bot_sendtext(bot_message, bot_token, bot_chat_id2) # send msg to group
-            
-            #! Save img to S3
-            if flat_info['imageLink'] != '':
-                img_name = make_img_name(flat_info['weblink'])
-                temp_img_path = '/tmp/' + img_name + '.jpg'
-                download_img(flat_info['imageLink'], temp_img_path)
-                file_uploaded = upload_file_s3(temp_img_path, 'wohnungsuchers3', 'wohnungSucherImages/' + img_name + '.jpg')
-                print(file_uploaded)
-            
-            else:
-                print('no picture was uploaded')
+
+            # #! Save img to S3
+            # if flat_info['imageLink'] != '':
+            #     img_name = make_img_name(flat_info['weblink'])
+            #     temp_img_path = '/tmp/' + img_name + '.jpg'
+            #     download_img(flat_info['imageLink'], temp_img_path)
+            #     file_uploaded = upload_file_s3(temp_img_path, 'wohnungsuchers3', 'wohnungSucherImages/' + img_name + '.jpg')
+            #     print(file_uploaded)
+
+            # else:
+            #     print('no picture was uploaded')
 
     print('Execution time is {}'.format(time.time() - start_time))
     return {
