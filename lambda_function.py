@@ -7,6 +7,7 @@
 import os
 import time
 import logging
+import pprint
 import json
 import boto3
 
@@ -32,7 +33,7 @@ def lambda_handler(event,context):
 
     start_time = time.time()
     new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
-    #print(new_flats_url_list)
+    pprint.pprint(new_flats_url_list)
 
     db_flat_weblinks = [] # Links on already saved flats in db
     db_flats_dict = scan_db('source', 'immoscout24')
