@@ -26,7 +26,7 @@ immo24_search_url = config.get('URLS','SEARCH1')
 immo24_base_url = config.get('URLS','BASEURL')
 
 bot_token = os.environ['BOTTOKEN'] # get bot token from lambda env var
-#bot_chat_id = os.environ['CHATID'] #! For personal use 
+#bot_chat_id = os.environ['CHATID'] #! For personal use
 bot_chat_id2 = os.environ['CHATID2']
 
 def lambda_handler(event,context):
