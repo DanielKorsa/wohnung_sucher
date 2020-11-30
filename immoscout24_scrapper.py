@@ -33,7 +33,7 @@ def get_new_flats_info(immo24_search_url, immo24_base_url):
         flat_id = flat.find(attrs={"data-id": True})['data-id'] # get flat ID
         flat_url = immo24_base_url + flat_id # make flat url
         new_flats_url_list.append(flat_url)
-        #print(flat_url)
+        print('URL ' + flat_url)
 
     return new_flats_url_list
 

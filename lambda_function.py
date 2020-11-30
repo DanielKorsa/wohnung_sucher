@@ -41,7 +41,8 @@ def lambda_handler(event,context):
         db_flat_weblinks.append(db_flat['weblink'])
 
     fresh_deals_urls = list(set(new_flats_url_list) - set(db_flat_weblinks))
-    #print(db_flat_weblinks)
+    print('Fresh deals')
+    print(fresh_deals_urls)
 
     if not fresh_deals_urls:
 
