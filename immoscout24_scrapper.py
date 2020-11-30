@@ -54,7 +54,8 @@ def get_flat_full_details(immo_flat_url):
         print('AttributeError - no descripttion')
     # This parameters are required:
     flat_full_info['address'] = flat_content.find(class_= 'address-block').text.strip()
-    flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete is24-value font-semibold is24-preis-value').text.strip()
+    flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete-main is24-value font-semibold is24-preis-value').text.strip()
+    #flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete is24-value font-semibold is24-preis-value').text.strip()
     flat_full_info['rooms'] = flat_content.find(class_= 'is24qa-zi is24-value font-semibold').text.strip()
     flat_full_info['Area'] = flat_content.find(class_= 'is24qa-flaeche is24-value font-semibold').text.strip()
 
