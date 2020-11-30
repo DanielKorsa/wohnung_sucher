@@ -52,12 +52,23 @@ def get_flat_full_details(immo_flat_url):
     except AttributeError:
         flat_full_info ['description'] = ''
         print('AttributeError - no descripttion')
-    # This parameters are required:
-    flat_full_info['address'] = flat_content.find(class_= 'address-block').text.strip()
-    flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete-main is24-value font-semibold is24-preis-value').text.strip()
+    try:
+        flat_full_info['address'] = flat_content.find(class_= 'address-block').text.strip()
+    except AttributeError:
+        flat_full_info ['address'] = ''
+    try:
+        flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete-main is24-value font-semibold is24-preis-value').text.strip()
+    except AttributeError:
+        flat_full_info['price'] = ''
     #flat_full_info['price'] = flat_content.find(class_= 'is24qa-kaltmiete is24-value font-semibold is24-preis-value').text.strip()
-    flat_full_info['rooms'] = flat_content.find(class_= 'is24qa-zi-main is24-value font-semibold').text.strip()
-    flat_full_info['Area'] = flat_content.find(class_= 'is24qa-flaeche-main is24-value font-semibold').text.strip()
+    try:
+        flat_full_info['rooms'] = flat_content.find(class_= 'is24qa-zi-main is24-value font-semibold').text.strip()
+    except AttributeError:
+        flat_full_info['rooms'] = ''
+    try:
+        flat_full_info['Area'] = flat_content.find(class_= 'is24qa-flaeche-main is24-value font-semibold').text.strip()
+    except AttributeError:
+        flat_full_info['Area'] = ''
 
     try:
         flat_full_info['movinDate'] = flat_content.find(class_= 'is24qa-bezugsfrei-ab grid-item three-fifths').text.strip()
@@ -85,12 +96,12 @@ def get_flat_full_details(immo_flat_url):
     except Exception as e:
         print(e)
         flat_full_info['onlineSince'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-    
+
     #Adding a pic to it
     try:
         flat_full_info['imageLink'] = flat_content.find(class_= 'first-gallery-picture-container').find('img').get('src')
         #print(type(flat_full_info['imageLink']))
-        
+
     except:
         print('no picture provided')
         flat_full_info['imageLink'] = ''
