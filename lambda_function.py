@@ -4,6 +4,8 @@
 # By Danil Konovalov <gesundmeister@gmail.com>!
 # Telegram bot to get the newest flat offers from Immobilienscout24.de
 
+from random import randrange
+import time
 import os
 import time
 import logging
@@ -30,6 +32,7 @@ bot_chat_id2 = os.environ['CHATID2']
 
 def lambda_handler(event,context):
 
+    time.sleep(randrange(3)) # random delay
     start_time = time.time()
     new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
     pprint.pprint(new_flats_url_list)

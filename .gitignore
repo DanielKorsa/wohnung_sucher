@@ -6,7 +6,7 @@ wohnung_sucher/
 database_dump.json
 test/
 test.py
-
+delete.json
 # Images and docs
 
 *.jpg
