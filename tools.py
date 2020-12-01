@@ -145,7 +145,7 @@ def upload_file_s3(file_name, bucket, object_name=None):
     except ClientError as e:
         logging.error(e)
         return False
-    
+
     return True
 
 

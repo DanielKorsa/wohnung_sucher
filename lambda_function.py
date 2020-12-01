@@ -33,12 +33,15 @@ bot_chat_id2 = os.environ['CHATID2']
 def lambda_handler(event,context):
 
     start_time = time.time()
-    new_flats_url_list, json_debug = get_new_flats_info(immo24_search_url, immo24_base_url)
-    temp_json_debug_path = '/tmp/' + 'json_log' + '.json'
-    with open(temp_json_debug_path, 'w', encoding='utf-8') as f:
-        json.dump(json_debug, f, ensure_ascii=False, indent=4)
-    file_uploaded = upload_file_s3(temp_json_debug_path, 'wohnungsuchers3', 'log.json')
-    print(file_uploaded)
+    new_flats_url_list, blocked = get_new_flats_info(immo24_search_url, immo24_base_url)
+    if blocked:
+        bot_message = 'Captain we are blocked'
+        bot_sendtext(bot_message, bot_token, bot_chat_id)
+    # temp_json_debug_path = '/tmp/' + 'json_log' + '.json'
+    # with open(temp_json_debug_path, 'w', encoding='utf-8') as f:
+    #     json.dump(json_debug, f, ensure_ascii=False, indent=4)
+    # file_uploaded = upload_file_s3(temp_json_debug_path, 'wohnungsuchers3', 'log.json')
+    # print(file_uploaded)
     pprint.pprint(new_flats_url_list)
     if not new_flats_url_list:
         logger.info('Couldnt scrape the listing page with results')
@@ -55,7 +58,7 @@ def lambda_handler(event,context):
     if not fresh_deals_urls:
 
         bot_message = 'Nothing new'
-        bot_sendtext(bot_message, bot_token, bot_chat_id) #! DELETE
+        #bot_sendtext(bot_message, bot_token, bot_chat_id) #! DELETE
     else:
 
         for fresh_deal_url in fresh_deals_urls:

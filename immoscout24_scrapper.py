@@ -26,16 +26,20 @@ def get_new_flats_info(immo24_search_url, immo24_base_url):
     Get list of new flats
     '''
     immo24_content = get_page_content(immo24_search_url)
-    flats = immo24_content.find_all(class_='result-list__listing') # get all flats on 1st page
-    #print(flats)
-    new_flats_url_list = []
-    for flat in flats:
-        flat_id = flat.find(attrs={"data-id": True})['data-id'] # get flat ID
-        flat_url = immo24_base_url + flat_id # make flat url
-        new_flats_url_list.append(flat_url)
-        print('URL ' + flat_url)
+    warning = 'To regain access, please make sure that cookies and JavaScript are enabled before reloading the page'
+    if warning in immo24_content.text:
+        print('----------------------BLOCKED')
+        blocked = True
+    else:
+        flats = immo24_content.find_all(class_='result-list__listing') # get all flats on 1st page
+        new_flats_url_list = []
+        for flat in flats:
+            flat_id = flat.find(attrs={"data-id": True})['data-id'] # get flat ID
+            flat_url = immo24_base_url + flat_id # make flat url
+            new_flats_url_list.append(flat_url)
+        blocked = False
 
-    return new_flats_url_list, flats
+    return new_flats_url_list, blocked
 
 def get_flat_full_details(immo_flat_url):
 
