@@ -26,6 +26,8 @@ config = read_config_file(CONF_FILE) # read config file
 #immo24_search_url = config.get('URLS','SEARCH1') #! Instead search link is in env variable
 immo24_base_url = config.get('URLS','BASEURL')
 immo24_search_url = os.environ['SEARCHLINK']
+
+immo24_search_url = immo24_search_url.replace('price=-950', 'price=-' + str(randrange(950, 962)))
 bot_token = os.environ['BOTTOKEN'] # get bot token from lambda env var
 bot_chat_id = os.environ['CHATID'] #! For personal use
 bot_chat_id2 = os.environ['CHATID2']

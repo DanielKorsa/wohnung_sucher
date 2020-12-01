@@ -20,10 +20,19 @@ cities = [
     'munich',
     'frankfurt',
     'duesseldorf',
-    'cologne'
+    'cologne',
+    'ingolstadt'
         ]
 
 def make_search_url(user_search_criteria):
+    """[summary]
+
+    Args:
+        user_search_criteria ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
 
     #! city must be specified
 
