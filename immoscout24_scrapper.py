@@ -35,7 +35,7 @@ def get_new_flats_info(immo24_search_url, immo24_base_url):
         new_flats_url_list.append(flat_url)
         print('URL ' + flat_url)
 
-    return new_flats_url_list
+    return new_flats_url_list, flats
 
 def get_flat_full_details(immo_flat_url):
 

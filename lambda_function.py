@@ -33,10 +33,15 @@ bot_chat_id2 = os.environ['CHATID2']
 def lambda_handler(event,context):
 
     start_time = time.time()
-    new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
+    new_flats_url_list, json_debug = get_new_flats_info(immo24_search_url, immo24_base_url)
+    temp_json_debug_path = '/tmp/' + 'json_log' + '.json'
+    with open(temp_json_debug_path, 'w', encoding='utf-8') as f:
+        json.dump(json_debug, f, ensure_ascii=False, indent=4)
+    file_uploaded = upload_file_s3(temp_json_debug_path, 'wohnungsuchers3', 'log.json')
+    print(file_uploaded)
     pprint.pprint(new_flats_url_list)
     if not new_flats_url_list:
-        print('Couldnt scrape the listing page with results')
+        logger.info('Couldnt scrape the listing page with results')
 
     db_flat_weblinks = [] # Links on already saved flats in db
     db_flats_dict = scan_db('source', 'immoscout24')
