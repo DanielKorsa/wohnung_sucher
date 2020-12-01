@@ -30,6 +30,7 @@ def get_new_flats_info(immo24_search_url, immo24_base_url):
     if warning in immo24_content.text:
         print('----------------------BLOCKED')
         blocked = True
+        new_flats_url_list = []
     else:
         flats = immo24_content.find_all(class_='result-list__listing') # get all flats on 1st page
         new_flats_url_list = []
