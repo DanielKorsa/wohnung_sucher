@@ -27,6 +27,9 @@ def get_new_flats_info(immo24_search_url, immo24_base_url):
     '''
     immo24_content = get_page_content(immo24_search_url)
     flats = immo24_content.find_all(class_='result-list__listing') # get all flats on 1st page
+    print('DEBUGGING print flats')
+    print(flats)
+    print('DEBUGGING')
 
     new_flats_url_list = []
     for flat in flats:

@@ -46,9 +46,9 @@ def read_config_file(conf_filename):
     '''
     Read local file `config.ini`
     '''
-    config = configparser.ConfigParser()                                     
+    config = configparser.ConfigParser()
     config.read(conf_filename)
-    
+
     return config
 
 

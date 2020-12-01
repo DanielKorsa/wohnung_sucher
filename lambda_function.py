@@ -21,10 +21,9 @@ logger.setLevel(logging.INFO)
 
 CONF_FILE = 'config.ini'
 config = read_config_file(CONF_FILE) # read config file
-
-immo24_search_url = config.get('URLS','SEARCH1')
+#immo24_search_url = config.get('URLS','SEARCH1') #! Instead search link is in env variable
 immo24_base_url = config.get('URLS','BASEURL')
-
+immo24_search_url = os.environ['SEARCHLINK']
 bot_token = os.environ['BOTTOKEN'] # get bot token from lambda env var
 #bot_chat_id = os.environ['CHATID'] #! For personal use
 bot_chat_id2 = os.environ['CHATID2']
@@ -34,6 +33,8 @@ def lambda_handler(event,context):
     start_time = time.time()
     new_flats_url_list = get_new_flats_info(immo24_search_url, immo24_base_url)
     pprint.pprint(new_flats_url_list)
+    if not new_flats_url_list:
+        print('Couldnt scrape the listing page with results')
 
     db_flat_weblinks = [] # Links on already saved flats in db
     db_flats_dict = scan_db('source', 'immoscout24')
