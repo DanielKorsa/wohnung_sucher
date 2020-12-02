@@ -42,4 +42,4 @@ immo24_search_url = immo24_search_url.replace('-950', '-' + str(randrange(950, 9
 if randrange(1,5) > 3:
     immo24_search_url += '&enteredFrom=result_list'
 
-print(immo24_search_url.split('1.5')[1])
+print(immo24_search_url)

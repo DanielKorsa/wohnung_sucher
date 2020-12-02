@@ -20,13 +20,13 @@ def get_page_content(url):
     pprint.pprint(response)
     content = BeautifulSoup(response.text, 'html5lib')
 
-    return content
+    return content, headers
 
 def get_new_flats_info(immo24_search_url, immo24_base_url):
     '''
     Get list of new flats
     '''
-    immo24_content = get_page_content(immo24_search_url)
+    immo24_content, header = get_page_content(immo24_search_url)
     warning = 'To regain access, please make sure that cookies and JavaScript are enabled before reloading the page'
     if warning in immo24_content.text:
         print('----------------------BLOCKED')
@@ -41,11 +41,11 @@ def get_new_flats_info(immo24_search_url, immo24_base_url):
             new_flats_url_list.append(flat_url)
         blocked = False
 
-    return new_flats_url_list, blocked
+    return new_flats_url_list, blocked, header
 
 def get_flat_full_details(immo_flat_url):
 
-    flat_content = get_page_content(immo_flat_url)
+    flat_content, header = get_page_content(immo_flat_url)
     #pprint.pprint(flat_content)
     flat_full_info = {}
     flat_full_info['weblink'] = immo_flat_url

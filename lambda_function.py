@@ -40,10 +40,11 @@ def lambda_handler(event,context):
 
     start_time = time.time()
     time.sleep(random()) # little random delay
-    new_flats_url_list, blocked = get_new_flats_info(immo24_search_url, immo24_base_url)
+    new_flats_url_list, blocked, header = get_new_flats_info(immo24_search_url, immo24_base_url)
     if blocked:
-        bot_message = immo24_search_url.split('1.5')[1]
+        bot_message = immo24_search_url.split('numberofrooms')[1]
         bot_sendtext(bot_message, bot_token, bot_chat_id)
+        bot_sendtext(str(header), bot_token, bot_chat_id)
     # temp_json_debug_path = '/tmp/' + 'json_log' + '.json'
     # with open(temp_json_debug_path, 'w', encoding='utf-8') as f:
     #     json.dump(json_debug, f, ensure_ascii=False, indent=4)
