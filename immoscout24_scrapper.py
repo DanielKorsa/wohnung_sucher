@@ -15,6 +15,7 @@ def get_page_content(url):
     Get page content
     '''
     headers = get_header()
+    #pprint.pprint(headers)
     response = requests.get(url, headers = headers)
     pprint.pprint(response)
     content = BeautifulSoup(response.text, 'html5lib')

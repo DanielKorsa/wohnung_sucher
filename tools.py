@@ -66,20 +66,20 @@ def get_header():
 
 
     HEADERS = [
-        {
-        'Connection': 'keep-alive',
-        'Pragma': 'no-cache',
-        'Cache-Control': 'no-cache',
-        'Upgrade-Insecure-Requests': '1',
-        'User-Agent': f'{random.choice(USER_AGENTS)}',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,'
-                    'application/signed-exchange;v=b3;q=0.9',
-        'Sec-Fetch-Site': 'none',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-User': '?1',
-        'Sec-Fetch-Dest': 'document',
-        'Accept-Language': 'en-US,en;q=0.9',
-        },
+        # {
+        # 'Connection': 'keep-alive',
+        # 'Pragma': 'no-cache',
+        # 'Cache-Control': 'no-cache',
+        # 'Upgrade-Insecure-Requests': '1',
+        # 'User-Agent': f'{random.choice(USER_AGENTS)}',
+        # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,'
+        #             'application/signed-exchange;v=b3;q=0.9',
+        # 'Sec-Fetch-Site': 'none',
+        # 'Sec-Fetch-Mode': 'navigate',
+        # 'Sec-Fetch-User': '?1',
+        # 'Sec-Fetch-Dest': 'document',
+        # 'Accept-Language': 'en-US,en;q=0.9',
+        # },
         {
         'Connection': 'keep-alive',
         'Accept-Language': 'en-US,en;q=0.9',
@@ -89,10 +89,20 @@ def get_header():
         'User-Agent': f'{random.choice(USER_AGENTS)}',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,'
                     'application/signed-exchange;v=b3;q=0.9',
+        },
+        {
+        'Connection': 'keep-alive',
+        'Pragma': 'no-cache',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Cache-Control': 'no-store',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': f'{random.choice(USER_AGENTS)}',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         }
-                ]
+]
 
-    return HEADERS[1]
+    return random.choice(HEADERS)
 
 
 def read_config_file(conf_filename):
