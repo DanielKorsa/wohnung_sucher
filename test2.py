@@ -37,15 +37,13 @@ import time
 immo24_search_url = 'https://www.immobilienscout24.de/Suche/de/berlin/berlin/wohnung-mieten?numberofrooms=1.5-&price=10-950.0&pricetype=rentpermonth&geocodes=110000000801,110000000201,110000000202,110000000301&sorting=2'
 
 
-immo24_search_url = immo24_search_url.replace('price=10', 'price=' + str(randrange(0, 13)))
+immo24_search_url = immo24_search_url.replace('price=10', 'price=' + str(randrange(0, 15)) + '.0')
 immo24_search_url = immo24_search_url.replace('-950', '-' + str(randrange(950, 962)))
 if randrange(1,5) > 3:
     immo24_search_url += '&enteredFrom=result_list'
 
-print(immo24_search_url.split('price=')[1])
 
-
-
+print(immo24_search_url)
 
 
 

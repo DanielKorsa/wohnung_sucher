@@ -27,10 +27,12 @@ config = read_config_file(CONF_FILE) # read config file
 immo24_base_url = config.get('URLS','BASEURL')
 immo24_search_url = os.environ['SEARCHLINK']
 
-immo24_search_url = immo24_search_url.replace('price=10', 'price=' + str(randrange(0, 13)))
+immo24_search_url = immo24_search_url.replace('price=10', 'price=' + str(randrange(0, 15)) + '.0')
 immo24_search_url = immo24_search_url.replace('-950', '-' + str(randrange(950, 962)))
 if randrange(1,5) > 3:
     immo24_search_url += '&enteredFrom=result_list'
+
+print(immo24_search_url)
 
 bot_token = os.environ['BOTTOKEN'] # get bot token from lambda env var
 bot_chat_id = os.environ['CHATID'] #! For personal use
@@ -42,7 +44,7 @@ def lambda_handler(event,context):
     time.sleep(random()) # little random delay
     new_flats_url_list, blocked, header = get_new_flats_info(immo24_search_url, immo24_base_url)
     if blocked:
-        bot_message = immo24_search_url.split('price=')[1]
+        bot_message = immo24_search_url#.split('price=')[1]
         bot_sendtext(bot_message, bot_token, bot_chat_id)
         bot_sendtext(str(header), bot_token, bot_chat_id)
     # temp_json_debug_path = '/tmp/' + 'json_log' + '.json'
