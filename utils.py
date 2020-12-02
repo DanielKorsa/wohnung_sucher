@@ -59,6 +59,35 @@ def make_search_url(user_search_criteria):
     return user_search_url
 
 
-search_url = make_search_url(user_search_criteria)
+# search_url = make_search_url(user_search_criteria)
 
-print(search_url)
+# print(search_url)
+
+
+def send_daily_update(t_user_id):
+    """[Send daily update at 21:00]
+
+    Args:
+        t_user_id ([type]): [description]
+    """
+
+    # 1) Read UserDB and get active users
+    # 2) For user in UserDB: check if daily update is available
+    # 3) Send Telegram msg
+
+
+    print('updates sent')
+
+def send_weekly_update(t_user_id):
+    """[Send every Sun at 20:00]
+
+    Args:
+        t_user_id ([type]): [description]
+    """
+
+    # 1) Read UserDB and get active users
+    # 2) For user in UserDB: check if weekly update is available
+    # 3) Send Telegram msg
+
+
+    print('updates sent')

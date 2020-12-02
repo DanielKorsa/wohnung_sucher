@@ -4,7 +4,7 @@
 # By Danil Konovalov <gesundmeister@gmail.com>!
 # Telegram bot to get the newest flat offers from Immobilienscout24.de
 
-from random import randrange
+from random import randrange, random
 import time
 import os
 import time
@@ -20,14 +20,15 @@ from telegram_bot_handler import bot_sendtext
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
+#! Add referral
 CONF_FILE = 'config.ini'
 config = read_config_file(CONF_FILE) # read config file
 #immo24_search_url = config.get('URLS','SEARCH1') #! Instead search link is in env variable
 immo24_base_url = config.get('URLS','BASEURL')
 immo24_search_url = os.environ['SEARCHLINK']
 
-immo24_search_url = immo24_search_url.replace('price=-950', 'price=-' + str(randrange(950, 962)))
+immo24_search_url = immo24_search_url.replace('price=10', 'price=' + str(randrange(0, 13)))
+immo24_search_url = immo24_search_url.replace('-950', '-' + str(randrange(950, 962)))
 if randrange(1,5) > 3:
     immo24_search_url += '&enteredFrom=result_list'
 
@@ -38,9 +39,10 @@ bot_chat_id2 = os.environ['CHATID2']
 def lambda_handler(event,context):
 
     start_time = time.time()
+    time.sleep(random()) # little random delay
     new_flats_url_list, blocked = get_new_flats_info(immo24_search_url, immo24_base_url)
     if blocked:
-        bot_message = immo24_search_url
+        bot_message = immo24_search_url.split('1.5')[1]
         bot_sendtext(bot_message, bot_token, bot_chat_id)
     # temp_json_debug_path = '/tmp/' + 'json_log' + '.json'
     # with open(temp_json_debug_path, 'w', encoding='utf-8') as f:
