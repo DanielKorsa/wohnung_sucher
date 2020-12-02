@@ -82,6 +82,7 @@ def get_header():
         },
         {
         'Connection': 'keep-alive',
+        'Accept-Language': 'en-US,en;q=0.9',
         'Accept-Encoding': 'gzip, deflate, br',
         'Cache-Control': 'no-store',
         'Upgrade-Insecure-Requests': '1',

@@ -20,19 +20,10 @@ cities = [
     'munich',
     'frankfurt',
     'duesseldorf',
-    'cologne',
-    'ingolstadt'
+    'cologne'
         ]
 
 def make_search_url(user_search_criteria):
-    """[summary]
-
-    Args:
-        user_search_criteria ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
 
     #! city must be specified
 
@@ -47,7 +38,7 @@ def make_search_url(user_search_criteria):
     # Only from price set
     elif user_search_criteria['price_from']:
         user_search_url += 'price=' + user_search_criteria['price_from'] + '-'
-    # Only to price set
+    # Only to price setgit
     elif user_search_criteria['price_to']:
         user_search_url += 'price=-' + user_search_criteria['price_to']
 
