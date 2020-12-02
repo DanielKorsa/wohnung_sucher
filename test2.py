@@ -35,6 +35,9 @@
 from random import randrange
 immo24_search_url = 'https://www.immobilienscout24.de/Suche/de/berlin/berlin/wohnung-mieten?numberofrooms=1.5-&price=-950.0&pricetype=rentpermonth&geocodes=110000000801,110000000201,110000000202,110000000301&sorting=2'
 randomized_price = str(randrange(950, 962))
-randomized_search_url = immo24_search_url.replace('price=-950', 'price=-' +randomized_price)
 
-print(immo24_search_url)
+randomized_search_url = immo24_search_url.replace('price=-950', 'price=-' +str(randrange(950, 962)))
+if randrange(1,5) > 3:
+    randomized_search_url += '&enteredFrom=result_list'
+
+print(randomized_search_url)
