@@ -36,7 +36,7 @@ def lambda_handler(event,context):
     start_time = time.time()
     time.sleep(random()) # little random delay
     immo24_search_url = os.environ['SEARCHLINK']
-    immo24_search_url = immo24_search_url.replace('price=10', 'price=' + str(randrange(0, 15)) + '.0')
+    immo24_search_url = immo24_search_url.replace('price=10', 'price=' + str(randrange(0, 15)))
     immo24_search_url = immo24_search_url.replace('-950', '-' + str(randrange(950, 962)))
     if randrange(1,5) > 3:
         immo24_search_url += '&enteredFrom=result_list'
