@@ -1,0 +1,393 @@
+(<!DOCTYPE html>
+<html><head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" name="viewport"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="noindex, nofollow" name="robots"/>
+    <meta content="no-cache, no-store, must-revalidate" http-equiv="cache-control"/>
+    <meta content="no-cache" http-equiv="pragma"/>
+    <meta content="0" http-equiv="expires"/>
+    <title>Ich bin kein Roboter - ImmobilienScout24</title>
+    <link href="https://www.immobilienscout24.de/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"/>
+    <link href="https://www.immobilienscout24.de/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+    <style>
+        @font-face {
+            font-family: "Make It Sans IS24 Web";
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url("https://www.static-immobilienscout24.de/fro/core/4.4.1/font/vendor/make-it-sans/MakeItSansIS24WEB-Regular.woff2") format("woff2"), url("https://www.static-immobilienscout24.de/fro/core/4.4.1/font/vendor/make-it-sans/MakeItSansIS24WEB-Regular.woff") 
+format("woff");
+        }
+        @font-face {
+            font-family: "Make It Sans IS24 Web";
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url("https://www.static-immobilienscout24.de/fro/core/4.4.1/font/vendor/make-it-sans/MakeItSansIS24WEB-Bold.woff2") format("woff2"), url("https://www.static-immobilienscout24.de/fro/core/4.4.1/font/vendor/make-it-sans/MakeItSansIS24WEB-Bold.woff") format("woff");
+        }
+
+        @font-face {
+            font-family: 'IS24Icons';
+            src: url('https://www.static-immobilienscout24.de/fro/core/4.4.1/font/vendor/is24-icons/is24-icons.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, input, ins, kbd, label, legend, li, main, mark, menu, nav, object, ol, p, pre, q, samp, section, select, small, span, strong, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, ul, var, video {
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+        body {
+            background-color: #fff;
+            color: #333;
+            font-size: 1.4em;
+            line-height: 1.61;
+            font-family: "Make It Sans IS24 Web",Verdana,"DejaVu Sans",Arial,Helvetica,sans-serif;
+        }
+        .page-wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1170px;
+            background-color: #fff;
+        }
+        .grid {
+            display: block;
+            margin-right: 0;
+        }
+        .grid:after {
+            display: table;
+            clear: both;
+            content: "";
+        }
+        .grid-item {
+            display: block;
+            float: left;
+            vertical-align: top;
+            text-align: left;
+        }
+        .header {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .header .grid {
+            padding-left: 70px;
+            padding-right: 70px;
+            padding-top: 14px;
+            padding-bottom: 14px;
+        }
+        .header .logo {
+            width: 50%;
+            float: left;
+        }
+        .header .logo img {
+            vertical-align: top;
+        }
+        .header .login-button {
+            width: 50%;
+            text-align: right;
+            float: left;
+        }
+        .header .login-button a {
+            padding-top: .35714286em;
+            padding-bottom: .35714286em;
+            min-width: 9.42857143em;
+            font-family: "Make It Sans IS24 Web",Verdana,"DejaVu Sans",Arial,Helvetica,sans-serif;
+            border-radius: 8px;
+            background-color: #fff;
+            display: inline-block;
+            border: 1px solid #333333;
+            padding: .64285714em 1.64285714em;
+            font-weight: 600;
+            font-size: 1.4rem;
+            text-align: center;
+            letter-spacing: .2px;
+            line-height: 1.42857143em;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #333333;
+        }
+        .header .login-button a:link, .header .login-button a:visited, .header .login-button a:focus, .header .login-button a:hover {
+            text-decoration: none;
+            color: #333333;
+        }
+        .header .login-button a:hover {
+            background-color: #eaeaea;
+        }
+        .main {
+            clear: both;
+            padding-top: 55px;
+            max-width: 583px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .main .headline {
+            font-size: 4.0rem;
+            font-weight: bold;
+            letter-spacing: 0px;
+            line-height: 4.8rem;
+            text-align: center;
+        }
+        .main .main__logo {
+            padding-top: 10px;
+            text-align: center;
+        }
+        .main .main__logo img {
+            height: 240px;
+            width: 240px;
+            vertical-align: top;
+        }
+        .main .main__part1 {
+            padding-top: 11px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 0px;
+            line-height: 20px;
+        }
+        .main .main__captcha {
+            padding-top: 36px;
+            padding-bottom: 36px;
+        }
+        .main .main_part2_header1 {
+            font-weight: bold;
+        }
+        .main .main_part2_header2 {
+            font-weight: bold;
+            padding-top: 16px;
+        }
+        .main .main__list {
+            padding-top: 14px;
+            padding-bottom: 42px;
+        }
+        .main .main__list ul li {
+            list-style-position: inside;
+        }
+        .footer {
+            background: #f2f2f2;
+            text-align: center;
+        }
+        .footer .footer-content {
+            max-width: 583px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 15px;
+            padding-bottom: 6px;
+            color: #757575;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+        }
+        .footer .footer-content div {
+            padding-top: 20px;
+        }
+        .footer .footer-content div:first-child {
+            padding-top: 0;
+        }
+        .footer .footer-content a, .footer .footer-content a:visited, .footer .footer-content a:link, .footer .footer-content a:focus, .footer .footer-content .legend {
+            color: #757575;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+            text-decoration: none;
+        }
+        .footer .footer-content a:hover {
+            color: #757575;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+            text-decoration: underline;
+        }
+
+        .g-recaptcha {
+            display: inline-block;
+        }
+
+        @media (max-width: 668px) {
+            .palm-hide {
+                display: none;
+            }
+            .header .grid {
+                padding-left: 16px;
+                padding-right: 16px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+            .main {
+                padding-top: 32px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .main .headline {
+                font-size: 3.2rem;
+                font-weight: normal;
+                line-height: 4.0rem;
+            }
+            .main .main__logo img {
+                height: 188px;
+                width: 188px;
+            }
+            .footer .footer-content {
+                padding-bottom: 32px;
+            }
+
+        }
+    </style>
+
+    <script>
+    function showBlockPage() {
+        console.log("showing block page");
+    }
+    setTimeout(showBlockPage, 10000);
+    </script>
+    <script async="" defer="" src="/assets/immo-1-17" type="text/javascript"></script>
+
+                <script>
+                window.onProtectionInitialized = function() {
+                    window.location.reload(true);
+                };
+                </script>
+
+</head>
+<body>
+
+<div class="header">
+    <div class="page-wrapper">
+        <div class="grid">
+            <div class="logo grid-item">
+                <a href="https://www.immobilienscout24.de/">
+                    <img alt="ImmoScout24 Logo" src="https://www.static-immobilienscout24.de/fro/imperva/0.0.1/is24-logo.svg"/>
+                </a>
+            </div>
+            <div class="login-button grid-item">
+                <a href="https://www.immobilienscout24.de/geschlossenerbereich/start.html?source=meinkontodropdown-login">
+                    Anmelden <span class="palm-hide">/ Registrieren</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-wrapper">
+
+<div class="main">
+    <div class="headline">
+        Ich bin kein Roboter
+    </div>
+    <div class="main__logo">
+        <img alt="Roboter Logo" src="https://www.static-immobilienscout24.de/fro/imperva/0.0.1/robot-logo.svg"/>
+    </div>
+<div class="main__part1">
+    Du bist ein Mensch aus Fleisch und Blut? Entschuldige bitte, dann hat unser System dich fÃ¤lschlicherweise als Roboter identifiziert. Du wirst in einigen Sekunden auf unsere Seite weitergeleitet.
+</div>
+
+    <div class="main__captcha">
+
+        <div class="container" id="explanation">
+
+                <p>To regain access, please make sure that cookies and JavaScript are enabled before reloading the page.</p>
+
+        </div>
+    </div>
+
+    <script charset="UTF-8" type="text/javascript">
+      const translatedStrings = {
+        toRegainAccess: {
+          EN: "To regain access, please make sure that cookies and JavaScript are enabled before reloading the page",
+          DE: "Um wieder Zugriff zu erhalten, stelle bitte sicher, dass Cookies und JavaScript aktiviert sind, bevor du die Seite neu lÃ¤dst",
+        },
+      };
+
+      function translateDoc(language, text) {
+        let replacement = text;
+
+        Object.entries(translatedStrings).forEach(([key, value]) => {
+          // Checks English string is present and a translation for the selected language exists before attempting to replace
+          if (value.EN && value[language]) {
+            replacement = replacement.replace(value.EN, value[language]);
+          }
+        });
+
+        return replacement;
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const impervaContent = document.getElementById("explanation")
+          .outerHTML;
+
+        const translatedContent = translateDoc("DE", impervaContent);
+
+        document.body.innerHTML = document.body.innerHTML.replace(
+          impervaContent,
+          translatedContent
+        );
+      });
+    </script>
+
+<div class="main__part2">
+
+    <div class="main_part2_header1">Warum fÃ¼hren wir diese SicherheitsmaÃ¤dliche Spam-Software bist. Damit schÃ¼tzen wir unsere Webseite und die Daten unserer Nutzerinnen und Nutzer vor betrÃ¼gerischen AktivitÃ¤ten.</div>
+
+    <div class="main_part2_header2">Warum haben wir deine Suchanfragen blockiert?</div>
+    <div class="main_part2_text2">Es kann verschiedene GrÃ¼nde haben, warum wir dich fÃ¤lschlicherweise als Roboter identifiziert haben. MÃ¶glicherweise</div>
+
+</div>
+<div class="main__list">
+<ul>
+    <li>hast du die Cookies fÃ¼r unsere Seite deaktiviert.</li>
+    <li>hast du die AusfÃ¼hrung von JavaScript deaktiviert.</li>
+    <li>nutzt du ein Browser-Plugin eines Drittanbieters, beispielsweise einen Ad-Blocker.</li>
+
+</ul>
+</div>
+
+
+</div>
+
+</div>
+
+<div class="footer">
+    <div class="footer-content">
+
+
+        <div>
+            <a href="https://www.immobilienscout24.de/unternehmen.html">Ãber uns</a> |
+            <a href="https://www.immobilienscout24.de/kontakt.html">Kontakt &amp; Hilfe</a> |
+            <a href="https://www.immobilienscout24.de/unternehmen/karriere/">Karriere</a> |
+            <a href="https://www.immobilienscout24.de/sitemap.html">Sitemap</a> |
+            <a href="https://api.immobilienscout24.de">Developer</a> |
+            <a href="https://www.immobilienscout24.de/unternehmen/mediendienst.html">Presseservice</a> |
+            <a href="https://www.immobilienscout24.de/ratgeber/newsletter.html">Newsletter abonnieren</a> |
+            <a href="https://www.immobilienscout24.de/impressum.html">Impressum</a> |
+            <a href="https://www.immobilienscout24.de/agb.html">AGB's &amp; Rechtliche Hinweise</a> |
+            <a href="https://www.immobilienscout24.de/agb/verbraucherinformationen.html">Verbraucherinformationen</a> |
+            <a href="https://www.immobilienscout24.de/agb/datenschutz.html">Datenschutz</a> |
+            <a href="https://www.immobilienscout24.de/lp/Geodatenkodex.html">Datenschutz Kodex fÃ¼r Geodatendienste</a> |
+            <a href="https://sicherheit.immobilienscout24.de">Sicherheit</a>
+        </div>
+        <div>
+            <!--<a href="">Immobiliensuche</a> | -->
+            <a href="https://www.scout24media.com/">Werbung</a> |
+            <a href="https://blog.immobilienscout24.de">Blog</a>
+            <!--|
+            <a href="">Nachbarschaft</a> |
+            <a href="">Gratis! E-Mail-Adresse @t-online.de</a>-->
+        </div>
+        <div>
+            <a href="https://www.immobilienscout24.de/">www.ImmobilienScout24.de</a>
+        </div>
+        <div class="legend">
+            Â© Copyright 1999 - 2020 Immobilien Scout GmbH
+        </div>
+    </div>
+
+</div>
+
+
+
+</body></html>,

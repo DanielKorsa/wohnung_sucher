@@ -77,10 +77,13 @@ def get_header():
         'DNT': '1',
         'Referer' : 'https://www.google.de',
         'User-Agent': f'{random.choice(USER_AGENTS)}',
+        },
+        {
+        'User-Agent': f'{random.choice(USER_AGENTS)}'
         }
 ]
 
-    return random.choice(HEADERS)
+    return HEADERS[4]#random.choice(HEADERS)
 
 
 def read_config_file(conf_filename):
