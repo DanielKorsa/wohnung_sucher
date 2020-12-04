@@ -1,0 +1,35 @@
+version: 0.2
+env:
+  variables:
+    LAMBDA_NAME: "wohnungSucherLondon"
+    BUCKET_NAME: "wohnungsuchers3"
+phases:
+  install:
+    runtime-versions:
+      python: 3.7 # for this project ver 
+    commands:
+      - apt-get update
+      - apt-get install zip
+  pre_build:
+    commands:
+      #- pip install virtualenv
+      - virtualenv -p python3.7 env
+      - . env/bin/activate
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - ISO_DATE=$(date +%Y-%m-%dT%H:%M:%S%z)
+      - TMP_DIR="dist-$ISO_DATE"
+      - mkdir $TMP_DIR
+      - cp *.py $TMP_DIR
+      - cp *.ini $TMP_DIR
+#      - cp *.html $TMP_DIR
+      - cp -rf env/lib/python3.7/site-packages/* $TMP_DIR
+      - cd $TMP_DIR; zip -r ../dist.zip *
+      - cd ..
+      - aws s3 cp dist.zip s3://$BUCKET_NAME/$LAMBDA_NAME/dist.zip
+      - aws lambda update-function-code --function-name $LAMBDA_NAME --s3-bucket $BUCKET_NAME --s3-key $LAMBDA_NAME/dist.zip --publish
+
+
+aws lambda update-function-code --function-name wohnungSucherLondon --s3-bucket wohnungsuchers3 --s3-key wohnungSucherLondon/dist.zip --publish
+#used it in CodeBuild
