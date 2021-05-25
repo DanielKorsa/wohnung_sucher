@@ -1,4 +1,4 @@
-#
+# Utils for Telegram bot for the future
 
 import random
 
@@ -12,7 +12,7 @@ user_search_criteria = {
     "livingspace_form": "",
     "livingspace_to": "100"
 }
-
+# Pool of german cities
 cities = [
     'berlin',
     'hamburg',
@@ -24,7 +24,14 @@ cities = [
         ]
 
 def make_search_url(user_search_criteria):
+    """[summary]
 
+    Args:
+        user_search_criteria ([dict]): [User defined criteria]
+
+    Returns:
+        [type]: [description]
+    """
     #! city must be specified
 
     user_search_url = 'https://www.immobilienscout24.de/Suche/de/{}/wohnung-mieten?'.format(user_search_criteria['city'])
@@ -70,7 +77,7 @@ def send_daily_update(t_user_id):
     Args:
         t_user_id ([type]): [description]
     """
-
+    #! Placeholder
     # 1) Read UserDB and get active users
     # 2) For user in UserDB: check if daily update is available
     # 3) Send Telegram msg
@@ -84,7 +91,7 @@ def send_weekly_update(t_user_id):
     Args:
         t_user_id ([type]): [description]
     """
-
+    #! Placeholder
     # 1) Read UserDB and get active users
     # 2) For user in UserDB: check if weekly update is available
     # 3) Send Telegram msg

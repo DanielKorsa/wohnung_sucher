@@ -1,10 +1,12 @@
-#
+# Utils & Tools
 
 import random
 import configparser
 import requests
 import logging
 
+import boto3
+from botocore.exceptions import ClientError
 
 
 def get_header():
@@ -84,6 +86,7 @@ def get_header():
 ]
 
     return HEADERS[4]#random.choice(HEADERS)
+
 #! Copied from https://curl.trillworks.com/
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0',
@@ -112,14 +115,6 @@ def read_config_file(conf_filename):
     return config
 
 
-def make_img_name(weblink):
-    '''
-    '''
-    return weblink.split('/')[-1]
-
-
-
-
 def download_img(img_url, img_new_path):
     '''
     Download img from url
@@ -128,18 +123,23 @@ def download_img(img_url, img_new_path):
     with open(img_new_path, 'wb') as handler:
         handler.write(img_data)
 
-
-import boto3
-from botocore.exceptions import ClientError
-
-
-def upload_file_s3(file_name, bucket, object_name=None):
     """Upload a file to an S3 bucket
 
     :param file_name: File to upload
     :param bucket: Bucket to upload to
     :param object_name: S3 object name. If not specified then file_name is used
     :return: True if file was uploaded, else False
+    """
+def upload_file_s3(file_name, bucket, object_name=None):
+    """[Upload a file to an S3 bucket]
+
+    Args:
+        file_name ([str]): [File to upload]
+        bucket ([str]): [Bucket to upload to]
+        object_name ([str], optional): [S3 object name. If not specified then file_name is used]. Defaults to None.
+
+    Returns:
+        [bool]: [True if uploaded]
     """
 
     # If S3 object_name was not specified, use file_name
@@ -155,10 +155,3 @@ def upload_file_s3(file_name, bucket, object_name=None):
         return False
 
     return True
-
-
-# img_name = make_img_name(weblink)
-# temp_img_path = '/tmp/' + img_name + '.jpg'
-# download_img(img_url, temp_img_path)
-# file_uploaded = upload_file_s3(temp_img_path, 'wohnungsuchers3', 'wohnungSucherImages/' + img_name + '.jpg')
-# print(file_uploaded)

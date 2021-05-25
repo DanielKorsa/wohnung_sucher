@@ -1,4 +1,4 @@
-#
+# Scraper for immobilienscout24
 
 from tools import get_header
 from datetime import datetime
@@ -9,10 +9,9 @@ from bs4 import BeautifulSoup
 
 #proxies = {'https': '51.75.160.176:9999'} proxies = proxies
 
-
 def get_page_content_hdr(url, headers, proxies):
     '''
-    Get page content
+    Get page content using proxies
     '''
     #pprint.pprint(headers)
     response = requests.get(url, headers = headers, proxies= proxies)
@@ -22,9 +21,14 @@ def get_page_content_hdr(url, headers, proxies):
     return content, headers
 
 def get_page_content(url):
-    '''
-    Get page content
-    '''
+    """[Get page content]
+
+    Args:
+        url ([str]): [web url]
+
+    Returns:
+        [type]: [description]
+    """
     headers = get_header()
     #pprint.pprint(headers)
     response = requests.get(url, headers = headers)
@@ -34,12 +38,21 @@ def get_page_content(url):
     return content, headers
 
 def get_new_flats_info(immo24_search_url, immo24_base_url):
-    '''
-    Get list of new flats
-    '''
+    """[Get list of new flats from the search page]
+
+    Args:
+        immo24_search_url ([str]): [search url]
+        immo24_base_url ([type]): [base search url]
+
+    Returns:
+        [new_flats_url_list]: [urls list on flats]
+        [blocked]:[if crawler got blocked]
+    """
     immo24_content, header = get_page_content(immo24_search_url)
-    warning = 'To regain access, please make sure that cookies and JavaScript are enabled before reloading the page'
+    warning = 'To regain access, please make sure that cookies and JavaScript \
+        are enabled before reloading the page'
     if warning in immo24_content.text:
+        # Scraper got blocked -> no need to parse further
         print('----------------------BLOCKED')
         blocked = True
         new_flats_url_list = []
@@ -55,7 +68,14 @@ def get_new_flats_info(immo24_search_url, immo24_base_url):
     return new_flats_url_list, blocked, header
 
 def get_flat_full_details(immo_flat_url):
+    """[Make a dict with data of 1 flat]
 
+    Args:
+        immo_flat_url ([str]): [Flat specific url]
+
+    Returns:
+        [dict]: [Flat data]
+    """
     flat_content, header = get_page_content(immo_flat_url)
     #pprint.pprint(flat_content)
     flat_full_info = {}
@@ -99,7 +119,6 @@ def get_flat_full_details(immo_flat_url):
     except AttributeError:
         flat_full_info['petsAllowed'] = ''
         print('AttributeError - no pets info')
-
 
     try:
         online_since = flat_content.find(class_= 'criteriagroup flex flex--wrap criteria-group--spacing padding-top-s').find('script').text.strip()
