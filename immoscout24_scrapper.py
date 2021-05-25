@@ -10,6 +10,17 @@ from bs4 import BeautifulSoup
 #proxies = {'https': '51.75.160.176:9999'} proxies = proxies
 
 
+def get_page_content_hdr(url, headers, proxies):
+    '''
+    Get page content
+    '''
+    #pprint.pprint(headers)
+    response = requests.get(url, headers = headers, proxies= proxies)
+    pprint.pprint(response)
+    content = BeautifulSoup(response.text, 'html5lib')
+
+    return content, headers
+
 def get_page_content(url):
     '''
     Get page content

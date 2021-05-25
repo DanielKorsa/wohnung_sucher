@@ -84,7 +84,23 @@ def get_header():
 ]
 
     return HEADERS[4]#random.choice(HEADERS)
+#! Copied from https://curl.trillworks.com/
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Referer': 'https://www.immobilienscout24.de/',
+    'Connection': 'keep-alive',
+    'Upgrade-Insecure-Requests': '1',
+    'DNT': '1',
+    'Sec-GPC': '1',
+    'Cache-Control': 'max-age=0',
+    'TE': 'Trailers',
+}
 
+params = (
+    ('enteredFrom', 'one_step_search'),
+)
 
 def read_config_file(conf_filename):
     '''
